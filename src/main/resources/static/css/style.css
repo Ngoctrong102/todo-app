@@ -127,6 +127,14 @@ li span {
     padding-left: 10px;
 }
 
+
+li.completed span {
+    text-decoration: line-through;
+    color: gray;
+    font-style: italic;
+}
+
+
 li span[style*="line-through"] {
     font-style: italic;
 }

@@ -14,21 +14,27 @@ public class TodoService {
     this.todoRepository = todoRepository;
   }
 
+  // Lấy danh sách tất cả Todo
   public List<TodoItem> getAllTodos() {
     return todoRepository.findAll();
   }
 
-  public void saveTodo(TodoItem todoItem) {
-    todoRepository.save(todoItem);
+  // Lưu Todo mới
+  public TodoItem saveTodo(TodoItem todoItem) {
+    return todoRepository.save(todoItem);
   }
 
+  // Xóa Todo theo ID
   public void deleteTodoById(Long id) {
     todoRepository.deleteById(id);
   }
 
-  public void toggleTodoStatus(Long id) {
-    TodoItem todo = todoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Todo ID: " + id));
+  // Toggle trạng thái completed
+  public TodoItem toggleTodoStatus(Long id) {
+    TodoItem todo = todoRepository.findById(id)
+        .orElseThrow(() -> new IllegalArgumentException("Invalid Todo ID: " + id));
     todo.setCompleted(!todo.isCompleted());
-    todoRepository.save(todo);
+    return todoRepository.save(todo);
   }
 }
+

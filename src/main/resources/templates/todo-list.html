@@ -1,33 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h1>Todo List</h1>
-
-<!-- Form thêm nhiệm vụ -->
-<form action="/add" method="post" th:object="${todoItem}">
-    <input type="text" th:field="*{description}" placeholder="Enter a new task" required>
-    <button type="submit">Add</button>
-</form>
-
-<!-- Danh sách nhiệm vụ -->
-<ul>
-    <li th:each="todo : ${todos}">
-        <!-- Nút toggle trạng thái -->
-        <form action="/toggle" method="post" style="margin: 0; display: flex; align-items: center;">
-            <input type="hidden" name="id" th:value="${todo.id}" />
-            <input type="checkbox" name="completed" th:checked="${todo.completed}" onchange="this.form.submit()" />
-        </form>
-        <span th:text="${todo.description}"
-              th:style="${todo.completed} ? 'text-decoration: line-through; color: gray;' : ''"></span>
-
-        <a th:href="@{/delete/{id}(id=${todo.id})}" class="delete-btn">
-            <img src="/images/delete-icon.png" alt="Delete">
-        </a>
-    </li>
-</ul>
+<div class="container">
+    <h1>Todo List</h1>
+    <form id="todoForm">
+        <input type="text" id="todoInput" placeholder="Enter a new task">
+        <button type="submit">Add</button>
+    </form>
+    <ul id="todoList"></ul>
+</div>
+<script src="/js/script.js"></script>
 </body>
 </html>
